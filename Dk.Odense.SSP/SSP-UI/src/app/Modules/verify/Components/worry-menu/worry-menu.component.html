@@ -1,0 +1,23 @@
+<ng-container
+  *ngIf="
+    menuItem.socialSecData.socialSecNum;
+    then personName;
+    else reportedPersonName
+  "
+></ng-container>
+<ng-template #personName>
+  <div class="card card-menu bg-light" mdbRipple rippleColor="dark">
+    <div class="card-body padding">
+      <h6>#{{ menuItem.increment }} - {{ menuItem.source }}</h6>
+      <h6>{{ menuItem.socialSecData.name }}</h6>
+    </div>
+  </div>
+</ng-template>
+<ng-template #reportedPersonName>
+  <div mdbBtn class="card card-menu bg-light zoom">
+    <div class="card-body padding">
+      <h6>#{{ menuItem.increment }} - {{ menuItem.source }}</h6>
+      <h6>{{ menuItem.reportedPerson.reportedName }}</h6>
+    </div>
+  </div>
+</ng-template>

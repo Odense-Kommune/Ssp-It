@@ -1,0 +1,24 @@
+<div class="card bg-light">
+  <div class="card-header"><h6>Statistik</h6></div>
+  <div class="card-body pt-2 pb-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"><b>Kategori:</b></th>
+          <th
+            *ngFor="let stats of groupingStats | sortBy : 'category'"
+            scope="col"
+          >
+            <b>{{ stats.category }}</b>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Antal:</th>
+          <td *ngFor="let stats of groupingStats">{{ stats.count }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

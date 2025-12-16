@@ -1,0 +1,42 @@
+<div class="card bg-light">
+  <div class="card-header">
+    <div class="row d-flex align-items-center">
+      <div class="col-9">
+        <b>
+          <p style="font-size: 1.2em">{{ crimescene }}</p></b
+        >
+      </div>
+      <div class="col-3">
+        <button
+          type="button"
+          class="btn btn-sm btn-danger"
+          mdbWavesEffect
+          (click)="Close()"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngFor="let menuItem of menuItems">
+    <ul class="collapse-ul">
+      <li
+        *ngFor="
+          let item of menuItem.worryItems
+            | dynamicFilter: crimescene
+            | sortBy: 'value'
+        "
+      >
+        <span (click)="pushSelectedData(item.id, menuItem.person, menuItem.id)">
+          <div class="table pt-3">
+            <div class="row">
+              <div class="col">
+                <span>#{{ item.increment }} - {{ menuItem.person.name }}</span>
+              </div>
+            </div>
+          </div>
+        </span>
+      </li>
+    </ul>
+  </ng-container>
+</div>

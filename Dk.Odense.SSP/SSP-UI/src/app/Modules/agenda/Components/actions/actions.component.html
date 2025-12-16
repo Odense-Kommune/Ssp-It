@@ -1,0 +1,52 @@
+<app-collapse [title]="'Handling'">
+  <div class="col-lg">
+    <h6>Kategoriser</h6>
+    <select
+      class="form-control"
+      [(ngModel)]="selectedCategorization"
+      (change)="setCategorization($event)"
+    >
+      <option value="">Vælg</option>
+      <option
+        *ngFor="let category of categorizations | sortBy: 'value'"
+        value="{{ category.id }}"
+      >
+        {{ category.value }}
+      </option>
+    </select>
+    <h6>Sagsområde</h6>
+    <select
+      class="form-control"
+      [(ngModel)]="selectedSspArea"
+      (change)="setSspArea($event)"
+    >
+      <option value="">Vælg</option>
+      <option
+        *ngFor="let sspArea of sspAreas | sortBy: 'value'"
+        value="{{ sspArea.id }}"
+      >
+        {{ sspArea.value }}
+      </option>
+    </select>
+    <h6>Tovholdernavn</h6>
+    <div class="input-group">
+      <input
+        id="socialWorker"
+        type="text"
+        class="form-control bg-white"
+        [(ngModel)]="socialWorker"
+      />
+      <button
+        class="btn btn-primary"
+        type="button"
+        mdbRipple
+        rippleColor="primary"
+        (click)="setSocialWorker()"
+      >
+        Gem
+      </button>
+    </div>
+
+    <br />
+  </div>
+</app-collapse>

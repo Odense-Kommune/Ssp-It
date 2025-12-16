@@ -1,0 +1,33 @@
+.top-border {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+.inline-block {
+  display: inline-block;
+}
+
+.titled-row {
+  padding-top: 5px;
+  margin-top: 10px;
+  border-top: 1px solid rgb(222, 222, 222);
+  position: relative;
+}
+
+.titled-row::before {
+  padding: 0 1.1em;
+  position: absolute;
+  display: block;
+  content: attr(data-title);
+  left: 50%;
+  top: -0.6em;
+  transform: translateX(-50%);
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.padding {
+  padding-top: 1.2em;
+}
+
+.card-title {
+  font-size: 1.1em !important;
+}

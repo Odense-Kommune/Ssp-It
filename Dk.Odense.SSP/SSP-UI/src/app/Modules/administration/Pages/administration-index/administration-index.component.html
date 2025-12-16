@@ -1,0 +1,87 @@
+<div class="grid">
+  <!-- Sub-Header Content -->
+  <div class="subheader"></div>
+  <!-- Side Menu -->
+  <div class="side"></div>
+  <!-- Content -->
+  <div class="content">
+    <div class="container-fluid" style="height: 100%">
+      <!-- Kilde -->
+      <app-collapse [title]="'Afsender'" [collapsed]="true">
+        <app-faset-editor
+          [content]="sourceList"
+          (pushOnCreateEvent)="sourceCreateEvent($event)"
+          (pushOnUpdateEvent)="sourceUpdateEvent($event)"
+          (pushOnDeleteEvent)="sourceDeleteEvent($event)"
+        ></app-faset-editor>
+      </app-collapse>
+      <div class="mt-4"></div>
+
+      <!-- Type -->
+      <app-collapse [title]="'Type'" [collapsed]="true">
+        <app-faset-editor
+          [content]="typeList"
+          (pushOnCreateEvent)="typeCreateEvent($event)"
+          (pushOnUpdateEvent)="typeUpdateEvent($event)"
+          (pushOnDeleteEvent)="typeDeleteEvent($event)"
+        ></app-faset-editor>
+      </app-collapse>
+      <div class="mt-4"></div>
+
+      <!-- Art -->
+      <app-collapse [title]="'Art'" [collapsed]="true">
+        <app-faset-editor
+          [content]="categoryList"
+          (pushOnCreateEvent)="categoryCreateEvent($event)"
+          (pushOnUpdateEvent)="categoryUpdateEvent($event)"
+          (pushOnDeleteEvent)="categoryDeleteEvent($event)"
+        ></app-faset-editor>
+      </app-collapse>
+      <div class="mt-4"></div>
+
+      <!-- Klassificering -->
+      <app-collapse [title]="'Klassificering'" [collapsed]="true">
+        <app-faset-editor
+          [content]="classificationList"
+          (pushOnCreateEvent)="classificationCreateEvent($event)"
+          (pushOnUpdateEvent)="classificationUpdateEvent($event)"
+          (pushOnDeleteEvent)="classificationDeleteEvent($event)"
+        ></app-faset-editor>
+      </app-collapse>
+      <div class="mt-4"></div>
+
+      <!-- SSP Område -->
+      <app-collapse [title]="'Sagsområde'" [collapsed]="true">
+        <app-faset-editor
+          [content]="areaList"
+          (pushOnCreateEvent)="areaCreateEvent($event)"
+          (pushOnUpdateEvent)="areaUpdateEvent($event)"
+          (pushOnDeleteEvent)="areaDeleteEvent($event)"
+        ></app-faset-editor>
+      </app-collapse>
+      <div class="mt-4"></div>
+
+      <!-- Kategorisering -->
+      <app-collapse [title]="'Kategorisering'" [collapsed]="true">
+        <app-categorization-editor
+          [content]="expireCategorizationList"
+          (pushOnCreateEvent)="expireCategoryCreateEvent($event)"
+          (pushOnUpdateEvent)="expireCategoryUpdateEvent($event)"
+          (pushOnDeleteEvent)="expireCategoryDeleteEvent($event)"
+        ></app-categorization-editor>
+      </app-collapse>
+      <div class="mt-4"></div>
+
+      <app-collapse [title]="'Tildelingsregler'">
+        <app-automation-rules
+          [areas]="areaList"
+          [rules]="areaRuleList"
+          (pushOnCreateEvent)="areaRuleCreateEvent($event)"
+          (pushOnDeleteEvent)="areaRuleDeleteEvent($event)"
+          (pushOnUpdateEvent)="areaRuleUpdateEvent($event)"
+        ></app-automation-rules>
+      </app-collapse>
+      <div class="mt-4 pb-4"></div>
+    </div>
+  </div>
+</div>

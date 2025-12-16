@@ -1,0 +1,104 @@
+<form name="new_rule">
+  <div class="decoration-box mb-4 bg-light">
+    <div class="underlined mb-4">
+      <h5>Ny regel</h5>
+    </div>
+    <!-- New Rule Form -->
+    <div class="row">
+      <div class="col-2">
+        <label for="num_in">Prioritet</label>
+      </div>
+      <div class="col">
+        <label for="new_system">System</label>
+      </div>
+      <div class="col">
+        <label for="new_val">Søgeværdi</label>
+      </div>
+      <div class="col">
+        <label for="new_sagsomraade">Sagsområde</label>
+      </div>
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <input
+          type="number"
+          name="num_in"
+          id="num_in"
+          [(ngModel)]="rule.priority"
+          class="form-control"
+        />
+      </div>
+      <div class="col">
+        <select
+          id="new_system"
+          name="sys"
+          [(ngModel)]="rule.system"
+          class="form-control"
+        >
+          <option *ngFor="let system of systems">{{ system }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          name="new_val"
+          [(ngModel)]="rule.searchValue"
+          class="form-control"
+          id="new_val"
+        />
+      </div>
+      <div class="col">
+        <select
+          id="new_sagsomraade"
+          class="form-control"
+          name="new_sags"
+          [(ngModel)]="rule.sspArea_Id"
+        >
+          <option *ngFor="let area of areas" [value]="area.id">
+            {{ area.value }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <button
+          class="btn btn-primary float-right"
+          (click)="onCreateEvent(rule)"
+        >
+          <i class="fa fa-plus"></i>Opret
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="decoration-box bg-light">
+  <div class="underlined mb-4">
+    <h5>Rediger regler</h5>
+  </div>
+
+  <!-- Edit List -->
+  <div class="row">
+    <div class="col-2">
+      <label>Prioritet</label>
+    </div>
+    <div class="col">
+      <label>System</label>
+    </div>
+    <div class="col">
+      <label>Søgeværdi</label>
+    </div>
+    <div class="col">
+      <label>Sagsområde</label>
+    </div>
+    <div class="col"></div>
+  </div>
+  <app-rule-item
+    [rule]="r"
+    [systems]="systems"
+    [areas]="areas"
+    (pushOnDeleteEvent)="onDeleteEvent($event)"
+    (pushOnUpdateEvent)="onUpdateEvent($event)"
+    *ngFor="let r of rules | sortBy: 'priority'"
+  ></app-rule-item>
+</div>

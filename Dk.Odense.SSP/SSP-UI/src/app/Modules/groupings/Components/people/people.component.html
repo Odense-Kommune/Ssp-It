@@ -1,0 +1,36 @@
+<div class="row top-margin">
+  <div class="col-lg">
+    <div class="card bg-light">
+      <div class="card-header">
+        <h6>Personer</h6>
+      </div>
+      <div class="card-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-4">
+              <h6>Navn</h6>
+            </div>
+            <div class="col-lg-3">
+              <h6>Cpr</h6>
+            </div>
+            <div class="col-lg-3">
+              <h6>Klassificering</h6>
+            </div>
+            <div class="col-lg-2">
+              <h6>Fjern</h6>
+            </div>
+          </div>
+          <div *ngFor="let person of people">
+            <app-single-person
+              [personGroup]="person"
+              [classifications]="classifications"
+              (personRemovedEvent)="onPersonRemoved($event)"
+              (classifyPersonEvent)="setClassification($event)"
+            ></app-single-person>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

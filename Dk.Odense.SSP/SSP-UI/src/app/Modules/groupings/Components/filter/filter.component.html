@@ -1,0 +1,79 @@
+<div class="menu-header bg-warning">Ny Gruppering</div>
+<div class="menu-section">
+  <mdb-form-control>
+    <input
+      mdbInput
+      type="text"
+      id="groupName"
+      #groupTitle
+      class="form-control my-3"
+    />
+    <label mdbLabel class="form-label" for="groupName">Grupperings navn</label>
+  </mdb-form-control>
+
+  <button
+    (click)="createGroup(groupTitle.value)"
+    class="btn btn-primary btn-block"
+  >
+    Opret ny gruppering
+  </button>
+</div>
+
+<div class="menu-header shadow-0">
+  <h6>Grupperinger</h6>
+</div>
+<div>
+  <input
+    type="text"
+    placeholder="Filtrer..."
+    class="form-control"
+    [(ngModel)]="filterText"
+  />
+</div>
+<div class="scrollable">
+  <ul class="groupings-menu">
+    <li
+      class="h-auto pt-1 pe-1 group-min-height"
+      *ngFor="let group of getFilteredGroupings()"
+    >
+      <a
+        href="javascript:void(0); false;"
+        [routerLink]="[linkRoute, group.id]"
+        >{{ group.value }}</a
+      >
+      <span class="badge badge-info">{{ group.personCount }}</span>
+    </li>
+  </ul>
+</div>
+
+<!-- Add Grouping Modal-->
+<ng-template #addGroupModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Opret gruppering</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <label for="grouping-name">Navngiv grupperingen</label>
+      <input id="grouping-name" type="text" class="form-control" #grpName />
+      <br />
+      <button
+        type="button"
+        class="btn btn-primary btn-block"
+        (click)="createGroup(grpName.value)"
+      >
+        Opret
+      </button>
+    </form>
+    <div class="success-badge" *ngIf="grpSuccess">
+      <i class="fa fa-check-circle"></i>
+    </div>
+  </div>
+</ng-template>

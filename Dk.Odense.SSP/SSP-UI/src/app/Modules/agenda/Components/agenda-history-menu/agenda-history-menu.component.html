@@ -1,0 +1,14 @@
+<div class="scrollable">
+  <ul>
+    <li *ngFor="let item of items">
+      <a
+        href="javascript:void(0); false;"
+        [routerLink]="'/agendaspecific/' + item.id"
+        routerLinkActive="router-link-active"
+      >
+        Uge {{ item.agendaNumber}} - {{item.date | date: 'dd-MM-yyyy'}}<br/>
+        <span>{{item.agendaName}}</span>
+      </a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,59 @@
+<table class="table table-bordered table-light">
+  <thead class="table-secondary">
+    <tr>
+      <th scope="col" class="col-2"></th>
+      <th scope="col" class="col-4">CPR</th>
+      <th scope="col" class="col-3">Navn</th>
+      <th scope="col" class="col-3">Adresse</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope="row">
+        <h6>Indberettet:</h6>
+      </td>
+      <td>{{ person?.reportedCpr }}</td>
+      <td>{{ person?.reportedName }}</td>
+      <td>{{ person?.reportedAdress }}</td>
+    </tr>
+    <tr>
+      <td scope="row">
+        <h6>Cpr-Opslag:</h6>
+      </td>
+      <td>
+        <div class="input-group" *ngIf="socialSecNum != null">
+          <input
+            #newSocialSecNum
+            type="text"
+            class="form-control"
+            placeholder="CPR"
+            [value]="socialSecNum"
+          />
+          <div class="input-group-append d-flex ms-3">
+            <button
+              class="btn btn-info btn-sm"
+              (click)="getSocialSecData(newSocialSecNum.value)"
+              [disabled]="searchDisabled"
+            >
+              Nyt opslag
+            </button>
+          </div>
+        </div>
+      </td>
+      <ng-container *ngIf="searchDisabled; then loading; else loaded">
+      </ng-container>
+      <ng-template #loading>
+        <td>
+          <div class="spinner"></div>
+        </td>
+        <td>
+          <div class="spinner"></div>
+        </td>
+      </ng-template>
+      <ng-template #loaded>
+        <td>{{ socialSecData?.name }}</td>
+        <td>{{ socialSecData?.address }}</td>
+      </ng-template>
+    </tr>
+  </tbody>
+</table>

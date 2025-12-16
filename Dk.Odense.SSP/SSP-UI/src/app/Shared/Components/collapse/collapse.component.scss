@@ -1,0 +1,27 @@
+.card-title {
+  display: inline-block;
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.collapsible {
+  transition: max-height 0.3s cubic-bezier(0, 1, 0, 1),
+    padding 0.3s cubic-bezier(0, 1, 0, 1);
+}
+
+.collapsed {
+  max-height: 0 !important;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.flex-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bolded {
+  font-weight: bold;
+}

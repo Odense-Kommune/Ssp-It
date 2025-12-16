@@ -1,0 +1,158 @@
+<div class="grid">
+  <div class="subheader"></div>
+  <div class="side side-flex">
+    <div class="menu-header bg-warning" (click)="scrollableClick($event)">
+      <h6>Ikke tildelt dagsorden ({{ countNonAgendaMenu }})</h6>
+    </div>
+    <div class="scrollable" #scrollable1>
+      <app-menu
+        *ngFor="let menuItem of notOnAgendaMenuItems | sortByDesc: 'value'"
+        [menuItem]="menuItem"
+        (pushWorryId)="getSelectedWorryId($event)"
+      ></app-menu>
+    </div>
+    <div class="menu-header success-bg" (click)="scrollableClick($event)">
+      <h6>Allerede på dagsorden ({{ countOnAgendaMenu }})</h6>
+    </div>
+    <div class="scrollable collapsed" #scrollable2>
+      <app-menu
+        *ngFor="let menuItem of onAgendaMenuItems | sortByDesc: 'value'"
+        [menuItem]="menuItem"
+        (pushWorryId)="getSelectedWorryId($event)"
+      ></app-menu>
+    </div>
+  </div>
+  <div class="content">
+    <div class="row mb-3">
+      <div class="col">
+        <app-datacard
+          *ngIf="person"
+          [person]="person"
+          [groups]="groups"
+        ></app-datacard>
+      </div>
+    </div>
+    <div class="row">
+      <!--First Col-->
+      <div class="col-lg-4">
+        <ng-content *ngIf="verifyWorry; then Worry; else NoWorry"></ng-content>
+        <ng-template #NoWorry>
+          <div class="card bg-light mb-3">
+            <div class="card-header" style="text-align: center">
+              <h6>Ingen Bekymring valgt</h6>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #Worry>
+          <app-reporter [reporter]="verifyWorry?.reporter"></app-reporter>
+
+          <ng-content
+            *ngIf="verifyWorry?.concern; then Concern; else NoConcern"
+          ></ng-content>
+          <ng-template #Concern>
+            <app-concern [concern]="verifyWorry?.concern"></app-concern>
+          </ng-template>
+          <ng-template #NoConcern>
+            <div class="card bg-light">
+              <div class="card-header">
+                <h6 class="card-title">Ingen bekymring</h6>
+              </div>
+            </div>
+          </ng-template>
+
+          <ng-content
+            *ngIf="verifyWorry?.assessment; then Assessment; else NoAssessment"
+          ></ng-content>
+          <ng-template #Assessment>
+            <app-assessment
+              [assessment]="verifyWorry?.assessment"
+              [collapsed]="true"
+            ></app-assessment>
+          </ng-template>
+          <ng-template #NoAssessment>
+            <div class="card bg-light">
+              <div class="card-header">
+                <h6 class="card-title">Ingen vurdering</h6>
+              </div>
+            </div>
+          </ng-template>
+        </ng-template>
+      </div>
+      <!-- Second Col-->
+      <div class="col-lg-4">
+        <ng-content
+          *ngIf="
+            policeWorryCategories && policeWorryRoles && verifyWorry;
+            then Statistics;
+            else NoWorry
+          "
+        ></ng-content>
+        <ng-template #Statistics>
+          <div class="mb-3">
+            <app-statistics
+              [policeWorryCategories]="policeWorryCategories!"
+              [policeWorryRoles]="policeWorryRoles!"
+              [selectedCategory]="verifyWorry?.policeWorryCategory?.id"
+              [selectedRole]="verifyWorry?.policeWorryRole?.id"
+              (pushPoliceCategory)="savePoliceWorryCategory($event)"
+              (pushPoliceRole)="savePoliceWorryRole($event)"
+            ></app-statistics>
+          </div>
+        </ng-template>
+        <app-page-robustness
+          *ngIf="personId"
+          [personId]="personId"
+        ></app-page-robustness>
+      </div>
+      <!-- Third Col-->
+      <div class="col-lg-4">
+        <div class="mb-3">
+          <app-collapse [title]="'Handling'">
+            <div class="row">
+              <div class="col-lg">
+                <h6>SSP stop dato</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-10">
+                <app-date-picker
+                  (pushDate)="saveSspStopDate($event)"
+                  [date]="person.sspStopDate"
+                ></app-date-picker>
+              </div>
+              <div class="col-2">
+                <button
+                  class="btn btn-danger"
+                  type="button"
+                  (click)="deleteSspStopDate()"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </app-collapse>
+        </div>
+      </div>
+    </div>
+    <!-- Notes -->
+    <hr class="divider" />
+    <div class="row">
+      <div class="col-6">
+        <app-notes
+          [title]="'Vidensdeling'"
+          [notes]="notes"
+          [newNote]="note"
+          (SaveText)="onSaveNote($event)"
+        ></app-notes>
+      </div>
+      <div class="col-6">
+        <app-notes
+          [title]="'Noter'"
+          [notes]="additionalNotes"
+          [newNote]="additionalNote"
+          (SaveText)="onSaveAddNote($event)"
+        ></app-notes>
+      </div>
+    </div>
+  </div>
+</div>

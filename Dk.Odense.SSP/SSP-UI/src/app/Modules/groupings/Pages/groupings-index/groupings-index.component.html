@@ -1,0 +1,56 @@
+<div class="grid">
+  <div class="subheader special-adjust">
+    <button
+      type="button"
+      class="btn btn-success ms-2"
+      (click)="openGroupingModal()"
+    >
+      Krydsreferencer
+    </button>
+    <div class="d-flex align-items-center justify-content-between w-50">
+      <input
+        mdbInput
+        class="form-control text-center"
+        [ngClass]="!editTitle ? 'border-0 bg-transparent' : ''"
+        [disabled]="!editTitle"
+        [(ngModel)]="selectedGroup.value"
+      />
+      <button class="btn btn-link" (click)="toggleEdit()">
+        <i *ngIf="!editTitle" class="far fa-edit text-primary"></i>
+        <i *ngIf="editTitle" class="far fa-save"></i>
+      </button>
+    </div>
+    <button
+      class="btn btn-danger"
+      (click)="deleteGroup(selectedGroup.id, selectedGroup.value)"
+    >
+      Slet gruppering
+    </button>
+  </div>
+  <!-- Side Menu -->
+  <div class="side side-flex">
+    <app-filter
+      class="side-flex"
+      [groupingsType]="groupingsType"
+      [groups]="groups"
+      (newGroupEvent)="createGroup($event)"
+      style="height: 100%"
+    ></app-filter>
+  </div>
+  <!-- Content -->
+  <div class="content" *ngIf="selectedGroup.id !== undefined">
+    <div class="container-fluid">
+      <app-grouping-stats *ngIf="groupingStats" [groupingStats]="groupingStats">
+      </app-grouping-stats>
+      <app-add-person
+        (addPersonEvent)="onAddPersonEvent($event)"
+      ></app-add-person>
+      <app-people
+        [people]="people"
+        [classifications]="classifications"
+        (personRemovedEvent)="onPersonRemoved($event)"
+        (setClassificationEvent)="setClassification($event)"
+      ></app-people>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="row mt-4">
+  <div class="col-lg">
+    <div class="card bg-light">
+      <div class="card-header">
+        <h6>Tilføj person</h6>
+      </div>
+      <div class="card-body">
+        <input
+          type="text"
+          class="form-control"
+          (keyup)="findPerson(personInput.value)"
+          #personInput
+        />
+        <div class="result-wrap" *ngIf="searchedPersons.length > 0">
+          <div class="result-box card bg-light">
+            <div class="card-header" style="margin-right: -16px">
+              <b>Resultater</b>
+              <button
+                class="float-right btn btn-primary btn-sm"
+                (click)="closeSearch()"
+              >
+                <i class="fa fa-close"></i>
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="scrollable">
+                <table class="table table-hover table-bordered">
+                  <thead class="table-dark">
+                    <tr>
+                      <td>Navn</td>
+                      <td>CPR</td>
+                      <td>Handling</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let person of searchedPersons">
+                      <td>{{ person.name }}</td>
+                      <td>{{ person.socialSecNum }}</td>
+                      <td>
+                        <button
+                          class="btn btn-primary btn-sm"
+                          (click)="addPersonToCurrentGroup(person, $event)"
+                        >
+                          Tilføj
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

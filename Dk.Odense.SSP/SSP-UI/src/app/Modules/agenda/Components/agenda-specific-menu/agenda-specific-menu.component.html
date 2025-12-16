@@ -1,0 +1,32 @@
+<app-collapse-menu
+  [person]="menuItem.person"
+  [agendaItemId]="menuItem.id"
+  [agendaNumber]="agendaNumber"
+>
+  <ul class="collapse-ul">
+    <ng-container *ngFor="let item of menuItem.worryItems | sortBy: 'value'">
+      <li
+        [ngClass]="{
+          red: item.policeCat == null || item.policeRole == null
+        }"
+        (click)="pushSelectedData(item.id, menuItem.person, menuItem.id)"
+        class="pb-1"
+      >
+        <div>
+          <div class="row pt-1 pb-1">
+            <div class="col">
+              <span>#{{ item.increment }} - {{ item.workplace }}</span>
+            </div>
+          </div>
+
+          <span
+            *ngIf="item?.crimeScene"
+            class="badge bg-info"
+            (click)="ChoseCrimeScene(item.crimeScene); $event.stopPropagation()"
+            >{{ item.crimeScene }}</span
+          >
+        </div>
+      </li>
+    </ng-container>
+  </ul>
+</app-collapse-menu>

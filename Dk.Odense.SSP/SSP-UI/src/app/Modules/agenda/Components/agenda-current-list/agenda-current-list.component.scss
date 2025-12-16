@@ -1,0 +1,24 @@
+.header-row {
+  margin-top: -1.25rem;
+  display: flex;
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+  height: 35px;
+  background-color: #dfdfdf;
+}
+
+.alt-bg:nth-child(2n) {
+  background-color: #efefef;
+}
+
+.alt-bg {
+  height: 50px;
+}
+
+.edit-bn {
+  margin-left: 5px;
+}
+.edit-name-input {
+  width: 50%;
+  margin-left: 15px;
+}

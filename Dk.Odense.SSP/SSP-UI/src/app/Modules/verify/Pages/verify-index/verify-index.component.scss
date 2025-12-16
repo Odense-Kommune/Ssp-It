@@ -1,0 +1,35 @@
+.subheader {
+  font-weight: bold;
+}
+.padding {
+  padding: 8px 0 0 1.25rem;
+}
+
+.overflow-container {
+  max-height: 230px;
+  height: 230px;
+  overflow-y: scroll;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.success-bg {
+  background-color: #35ca57;
+}
+
+.danger-bg {
+  background-color: #ff6070;
+}
+
+.side-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-header:hover {
+  cursor: pointer;
+}
+
+.collapsed {
+  max-height: 0;
+}

@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dk.Odense.SSP.Application\Dk.Odense.SSP.Application.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.Domain\Dk.Odense.SSP.Domain.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.UserCase\Dk.Odense.SSP.UserCase.csproj" />
+  </ItemGroup>
+
+</Project>

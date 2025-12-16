@@ -1,0 +1,76 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">
+    Grupperings krydsreferencer
+  </h5>
+  <button
+    type="button"
+    class="btn-close"
+    (click)="close()"
+    aria-label="Close"
+  ></button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-6" style="border-right: 2px solid gray">
+      <h5>Personer:</h5>
+      <div *ngIf="persons">
+        <div
+          class="form-check"
+          *ngFor="let person of persons | sortBy : 'name'"
+        >
+          <input
+            mdbCheckbox
+            class="form-check-input"
+            type="checkbox"
+            [value]="person.person_Id"
+            [id]="person.person_Id"
+            [checked]="true"
+            (click)="onPersonChange($event)"
+          />
+          <label class="form-check-label" for="{{ person.person_Id }}">
+            {{ person.name }}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <h5>Kategorisering:</h5>
+      <div *ngIf="categorizations">
+        <div
+          class="form-check"
+          *ngFor="let category of categorizations | sortBy : 'value'"
+        >
+          <input
+            mdbCheckbox
+            class="form-check-input"
+            type="checkbox"
+            [value]="category.id"
+            [id]="category.id"
+            [checked]="true"
+            (change)="onCategoryChange($event)"
+          />
+          <label class="form-check-label" [for]="category.id">
+            {{ category.value }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!downloading" class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="getExport()">
+    Hent udtræk
+  </button>
+</div>
+<div *ngIf="downloading && !error" class="modal-footer">
+  <button type="button" disabled class="btn btn-warning">
+    <div class="spinner-border spinner-border-sm me-1" role="status"></div>
+    <span class="">Henter...</span>
+  </button>
+</div>
+<div *ngIf="downloading && error" class="modal-footer">
+  <button type="button" disabled class="btn btn-danger">
+    <span class="">Fejl!</span>
+  </button>
+</div>

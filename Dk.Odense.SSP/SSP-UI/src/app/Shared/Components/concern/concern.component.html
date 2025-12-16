@@ -1,0 +1,21 @@
+<div class="card bg-light">
+  <!--          Bekymring-Header           -->
+  <div class="card-header">
+    <h6 class="card-title">Bekymring</h6>
+  </div>
+  <!--          Bekymring-Data           -->
+  <div class="card-body">
+    <h6>Beskrivelse</h6>
+    <p id="data-bekymring">
+      {{ concern?.crimeConcern }}
+      <span *ngIf="!concern?.crimeConcern"
+        ><i>Bekymringen har ingen beskrivelse.</i></span
+      >
+    </p>
+    <h6>Politianmeldt</h6>
+    <p>{{ concern?.reportedToPolice }}</p>
+    <h6>Underretning</h6>
+    <p>{{ concern?.notifyConcern }}</p>
+    <div class="row"></div>
+  </div>
+</div>

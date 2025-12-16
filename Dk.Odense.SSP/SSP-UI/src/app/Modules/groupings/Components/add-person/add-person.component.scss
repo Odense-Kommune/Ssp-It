@@ -1,0 +1,38 @@
+.result-box {
+  width: calc(100% - 36px);
+  position: absolute;
+  z-index: 5;
+  padding-right: 16px;
+  box-shadow: 4px 4px 4px -2px #aaa;
+}
+
+.result-wrap {
+  width: 100%;
+}
+
+.scrollable {
+  height: 230px;
+  overflow-y: scroll;
+  margin-right: -36px;
+  margin-left: -20px;
+  margin-top: -20px;
+  margin-bottom: -15px;
+}
+
+.scrollable > ul {
+  list-style-type: none;
+  padding: 0;
+  height: 100%;
+}
+
+.scrollable > ul > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.scrollable > ul > li.tall {
+  height: calc(100% / 5);
+}

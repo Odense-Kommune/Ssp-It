@@ -1,0 +1,37 @@
+<div class="bkJobs d-flex">
+  <span
+    *ngIf="jobProcessing.length > 0"
+    class="jobBox only-show-on-hover bg-light"
+  >
+    <span class="title d-flex justify-content-between">
+      <h6 class="d-inline">Jobs</h6>
+      <h6 class="mr-4 d-inline">Tid</h6>
+    </span>
+    <div
+      *ngFor="let job of jobProcessing"
+      class="d-flex justify-content-between"
+    >
+      <small>{{ job.jobName }}</small>
+      <small class="mr-3">{{ job.runningForMin }}min</small>
+    </div>
+  </span>
+  <ng-content
+    *ngIf="jobProcessing.length > 0; then Running; else NotRunning"
+  ></ng-content>
+  <ng-template #Running>
+    <div
+      class="item d-flex justify-content-center align-items-center position-relative bg-danger"
+    >
+      <i class="icon text-light fas fa-clipboard-list"></i>
+      <span class="count">{{ jobProcessing?.length }}</span>
+    </div>
+  </ng-template>
+  <ng-template #NotRunning>
+    <div
+      class="item d-flex justify-content-center align-items-center position-relative bg-success"
+    >
+      <i class="icon text-light fas fa-clipboard-list"></i>
+      <span class="count">0</span>
+    </div>
+  </ng-template>
+</div>

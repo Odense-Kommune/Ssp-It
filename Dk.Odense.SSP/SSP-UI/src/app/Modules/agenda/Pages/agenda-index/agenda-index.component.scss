@@ -1,0 +1,46 @@
+.body {
+  padding: 0;
+}
+
+.sub-grid {
+  display: grid;
+  grid-template-areas: 'left right';
+  grid-template-rows: 320px;
+}
+
+.sub-left {
+  grid-area: left;
+  overflow-y: scroll;
+}
+
+.sub-right {
+  grid-area: right;
+  padding: 5px;
+}
+
+.flex-cell > button {
+  margin-right: 10px;
+}
+
+ul.side-menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.side-menu > * {
+  display: block;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+ul.side-menu > a:hover {
+  background-color: #ccc;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  background-color: #fafafa;
+  margin-top: -2px;
+}

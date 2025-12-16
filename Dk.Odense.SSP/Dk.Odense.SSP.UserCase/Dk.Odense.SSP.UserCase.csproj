@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.0.1" />
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dk.Odense.SSP.Application\Dk.Odense.SSP.Application.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.Core\Dk.Odense.SSP.Core.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.Domain\Dk.Odense.SSP.Domain.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.Logger\Dk.Odense.SSP.Logger.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.SagOgDokIndeks\Dk.Odense.SSP.SagOgDokIndeks.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.SBSYS\Dk.Odense.SSP.SBSYS.csproj" />
+    <ProjectReference Include="..\Xflow\Dk.Odense.SSP.Xflow.csproj" />
+  </ItemGroup>
+
+</Project>

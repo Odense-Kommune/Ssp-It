@@ -1,0 +1,90 @@
+<!-- Side Menu -->
+<div class="grid">
+  <div class="subheader"></div>
+  <div class="side"></div>
+  <div class="content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-9">
+              <h6>Søg efter person</h6>
+            </div>
+            <div class="col-3">
+              <h6>SSP stopdate angivet</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-9">
+              <input
+                class="form-control"
+                placeholder="Filter"
+                [(ngModel)]="filterVal"
+                (keyup)="(0)"
+              />
+            </div>
+            <div class="col-lg-3 d-flex">
+              <div class="form-check form-check-inline">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  id="radioYes"
+                  name="radioSspStop"
+                  mdbInput
+                  [(ngModel)]="sspStopFilter" [value]="'yes'"
+                />
+                <label class="form-check-label" for="radioYes"
+                  >Ja</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  id="radioNo"
+                  name="radioSspStop"
+                  mdbInput
+                  [(ngModel)]="sspStopFilter" [value]="'no'"
+                />
+                <label class="form-check-label" for="radioNo"
+                  >Nej</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  id="radioAll"
+                  name="radioSspStop"
+                  checked
+                  mdbInput
+                  [(ngModel)]="sspStopFilter" [value]="''"
+                />
+                <label class="form-check-label" for="radioAll"
+                  >Alle</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="filterVal.length >= 3 && !loading">
+        <app-datacard
+          *ngFor="
+            let person of persons
+              | dynamicFilter: filterVal
+              | sspStop: sspStopFilter
+          "
+          [person]="person"
+          [groups]="groups"
+        ></app-datacard>
+      </ng-container>
+
+      <ng-container *ngIf="loading">
+        <div class="position">
+          <div class="spinner"></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

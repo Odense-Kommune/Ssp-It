@@ -1,0 +1,44 @@
+<app-collapse [title]="'Statistik'">
+  <div class="row">
+    <div class="col-lg">Art</div>
+    <div class="col-lg">Type</div>
+  </div>
+  <div class="row">
+    <div class="col-lg">
+      <select
+        class="form-control"
+        [(ngModel)]="selectedRole"
+        (change)="setPoliceWorryRole($event)"
+      >
+        <option [value]="guidNul">Vælg</option>
+        <ng-container *ngIf="policeWorryRoles">
+          <option
+            *ngFor="let policeWorryRole of policeWorryRoles | sortBy: 'value'"
+            [value]="policeWorryRole.id"
+          >
+            {{ policeWorryRole.value }}
+          </option>
+        </ng-container>
+      </select>
+    </div>
+    <div class="col-lg">
+      <select
+        class="form-control"
+        [(ngModel)]="selectedCategory"
+        (change)="setPoliceWorryCategory($event)"
+      >
+        <option [value]="guidNul">Vælg</option>
+        <ng-container *ngIf="policeWorryCategories">
+          <option
+            *ngFor="
+              let policeWorryCategory of policeWorryCategories | sortBy: 'value'
+            "
+            [value]="policeWorryCategory.id"
+          >
+            {{ policeWorryCategory.value }}
+          </option>
+        </ng-container>
+      </select>
+    </div>
+  </div>
+</app-collapse>

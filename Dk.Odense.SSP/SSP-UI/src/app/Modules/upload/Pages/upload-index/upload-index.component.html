@@ -1,0 +1,159 @@
+<!-- Side Menu -->
+<div class="grid">
+  <div class="subheader">
+    <div class="stepper">
+      <div class="step" data-active>Upload fil</div>
+      <div class="step">Verificer data</div>
+      <div class="step">Godkendt</div>
+    </div>
+  </div>
+
+  <div class="side"></div>
+  <!-- Content -->
+  <div class="content">
+    <!-- Step 0 -->
+    <div class="container-fluid" *ngIf="step == 0">
+      <form #form="ngForm">
+        <div class="row top-margin">
+          <div class="col-lg-6">
+            <label for="file_upload" id="file_upload_label">
+              <i class="fas fa-file-upload"></i>
+              <span id="filepicker_text"> Vælg fil</span>
+            </label>
+            <input
+              type="file"
+              id="file_upload"
+              (change)="handleFileInput($event)"
+              accept=".xlsx"
+            />
+          </div>
+          <div class="col-lg-6">
+            <label
+              for="file_download"
+              id="file_upload_label"
+              class="float-right"
+              (click)="DownloadSkab()"
+            >
+              <i class="fas fa-file-download"></i>
+              <span id="filepicker_text"> Download Skabelon</span>
+            </label>
+          </div>
+        </div>
+        <div class="row top-margin">
+          <div class="col-lg">
+            <h6>Afsender</h6>
+            <select
+              class="form-control invalid"
+              name="sourceIn"
+              id="sourceIn"
+              required
+              [(ngModel)]="source"
+              #ss="ngModel"
+              [ngClass]="{
+                'error-border':
+                  ss.invalid && (ss.dirty || ss.touched || form.submitted)
+              }"
+            >
+              <option value="">Vælg</option>
+              <option *ngFor="let option of sources" [value]="option.id">
+                {{ option.value }}
+              </option>
+            </select>
+            <div
+              class="invalid-text"
+              *ngIf="ss.invalid && (ss.dirty || ss.touched || form.submitted)"
+            >
+              Denne værdi er obligatorisk
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg top-margin">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="submitForm()"
+              [disabled]="isLoading"
+            >
+              <span *ngIf="isLoading">Henter...</span>
+              <span *ngIf="!isLoading">Indsend</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Step 1-->
+    <ng-container
+      *ngIf="step == 1 && data[0].errors; then errorTemp; else dataTemp"
+    >
+    </ng-container>
+
+    <ng-template #dataTemp>
+      <div
+        class="container-fluid"
+        *ngIf="step == 1 && !errorResponse"
+        style="height: 100%"
+      >
+        <div class="check-grid">
+          <div class="check-content">
+            <table class="table table-striped">
+              <thead class="table-light">
+                <th>Navn</th>
+                <th>Adresse</th>
+                <th>Cpr</th>
+                <th>Gerningssted</th>
+                <th>Dato</th>
+                <th>Bekymring</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data">
+                  <td>{{ item.reportedPerson.reportedName }}</td>
+                  <td>{{ item.reportedPerson.reportedAdress }}</td>
+                  <td>{{ item.reportedPerson.reportedCpr }}</td>
+                  <td>{{ item.worry.crimeScene }}</td>
+                  <td>{{ item.worry.createdDate | date }}</td>
+                  <td>{{ item.concern.crimeConcern }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="check-control">
+            <button class="btn btn-warning" (click)="reduceStep()">
+              Tilbage
+            </button>
+            <button
+              class="btn btn-primary"
+              (click)="submitProcessedData()"
+              [disabled]="isLoading"
+            >
+              <span *ngIf="isLoading">Henter...</span>
+              <span *ngIf="!isLoading">Godkend</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #errorTemp>
+      <div class="container-fluid" style="height: 100%">
+        <div class="check-grid">
+          <div class="check-content">
+            <h1>Følgende fejl fundet: {{ data[0].errors }}</h1>
+          </div>
+          <div class="check-control">
+            <button class="btn btn-warning" (click)="reduceStep()">
+              Tilbage
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- Step 2 -->
+    <div class="container-fluid" *ngIf="step == 2">
+      <h1 class="success">Dine data er gemt.</h1>
+    </div>
+  </div>
+</div>

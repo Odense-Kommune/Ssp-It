@@ -1,0 +1,46 @@
+<div class="grid">
+  <div class="subheader"></div>
+
+  <!-- Side-bar -->
+  <div class="side side-flex">
+    <div class="menu-header">
+      <h6>Ny dagsorden</h6>
+    </div>
+    <app-create-agenda (newAgenda)="onNewAgenda($event)"></app-create-agenda>
+
+    <div class="menu-header">
+      <h6>Historik</h6>
+    </div>
+    <app-agenda-history-menu
+      class="scrollable"
+      [items]="heldAgendas"
+    ></app-agenda-history-menu>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg">
+          <app-collapse [title]="'Indeværende dagsordener'">
+            <app-agenda-current-list
+              [agendas]="currentAgendas"
+              (agendaUpdatedEvent)="onAgendaUpdate($event)"
+              (dateUpdatedEvent)="onAgendaDateUpdate($event)"
+            ></app-agenda-current-list>
+          </app-collapse>
+        </div>
+      </div>
+      <div class="row top-margin">
+        <div class="col-lg">
+          <app-pending-worry
+            [pendingWorries]="pendingWorries"
+            (addWorriesEvent)="onAddWorries($event)"
+            [agendas]="currentAgendas"
+            [busy]="busyState"
+          ></app-pending-worry>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

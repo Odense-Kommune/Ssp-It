@@ -1,0 +1,73 @@
+<app-collapse [title]="'Vurdering'" [collapsed]="collapsed">
+  <div class="row">
+    <div class="col-lg d-flex justify-content-between">
+      <h6>Social adfærd</h6>
+      <div [attr.data-color]="assessment?.socialBehavior" class="light"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg pl-4">
+      <p>{{ assessment?.socialBehaviorElaborate }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg d-flex justify-content-between align-items-center">
+      <h6>Gode, jævnaldrende venner</h6>
+      <div [attr.data-color]="assessment?.goodFriends" class="light"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg pl-4">
+      <p>{{ assessment?.goodFriendsElaborate }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg d-flex justify-content-between">
+      <h6>Færdigheder og trivsel</h6>
+      <div [attr.data-color]="assessment?.skills" class="light"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg pl-4">
+      <p>{{ assessment?.skillsElaborate }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg d-flex justify-content-between">
+      <h6>Forhold til rusmidler</h6>
+      <div [attr.data-color]="assessment?.drugRelationship" class="light"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg pl-4">
+      <p>{{ assessment?.drugRelationshipElaborate }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg d-flex justify-content-between">
+      <h6>Drømme og/eller tanker om fremtiden</h6>
+      <div [attr.data-color]="assessment?.futureDreams" class="light"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg pl-4">
+      <p>{{ assessment?.futureDreamsElaborate }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg d-flex justify-content-between">
+      <h6>Positiv opbakning fra forældre/værge</h6>
+      <div [attr.data-color]="assessment?.positiveSupport" class="light"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg pl-4">
+      <p>{{ assessment?.positiveSupportElaborate }}</p>
+    </div>
+  </div>
+</app-collapse>

@@ -1,0 +1,27 @@
+<div class="input-group mb-3">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Navn"
+    [(ngModel)]="newFasetName"
+  />
+  <div class="input-group-append">
+    <button
+      class="btn btn-outline-primary"
+      type="button"
+      id="button-addon2"
+      (click)="createClick()"
+    >
+      Opret
+    </button>
+  </div>
+</div>
+<div class="card bg-light shadow-0" style="padding: 10px">
+  <div *ngFor="let item of content | sortBy: 'value'">
+    <app-faset-list-item
+      [content]="item"
+      (PushOnDeleteEvent)="deleteEvent($event)"
+      (PushOnUpdateEvent)="updateEvent($event)"
+    ></app-faset-list-item>
+  </div>
+</div>

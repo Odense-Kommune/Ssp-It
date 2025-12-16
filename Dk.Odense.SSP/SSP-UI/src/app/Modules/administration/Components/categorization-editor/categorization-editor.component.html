@@ -1,0 +1,46 @@
+<div class="row mb-3 bg-light">
+  <div class="col-lg-5">
+    <label>Kategorisering</label>
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="newCategoryName"
+      placeholder="Navn"
+    />
+  </div>
+  <div class="col-lg-4">
+    <label>Udløbsperiode</label>
+    <input
+      type="number"
+      min="1"
+      max="1095"
+      class="form-control"
+      [(ngModel)]="newExpireDays"
+    />
+  </div>
+  <div class="col-lg-2">
+    <label>Slet efter SSP afsluttelse</label><br />
+    <div class="checkbox">
+      <label style="font-size: 1.7em">
+        <input type="checkbox" value="" [(ngModel)]="newDeleteAfterSsp" />
+        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+      </label>
+    </div>
+  </div>
+  <div class="col-lg-1 d-flex justify-content-center align-items-end">
+    <span
+      ><button class="btn btn-outline-primary" (click)="create()">
+        Opret
+      </button></span
+    >
+  </div>
+</div>
+<div class="card p-2 bg-light shadow-0">
+  <div *ngFor="let item of content | sortBy: 'value'">
+    <app-categorization-list-item
+      [content]="item"
+      (deleteEvent)="onDeleteEvent($event)"
+      (updateEvent)="onUpdateEvent($event)"
+    ></app-categorization-list-item>
+  </div>
+</div>

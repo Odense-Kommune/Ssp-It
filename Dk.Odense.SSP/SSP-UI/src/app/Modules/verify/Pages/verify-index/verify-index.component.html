@@ -1,0 +1,94 @@
+<!-- Sub header -->
+<div class="grid">
+  <div class="subheader flexhack">
+    <div class="dummy-element">
+      <app-pending-status
+        [PendingItems]="pendingItems"
+        (updateDataEvent)="onUpdateDataEvent($event)"
+      ></app-pending-status>
+    </div>
+    <div class="dummy-element text-center">
+      <h6>{{ selectedWorryName }}</h6>
+    </div>
+    <div class="dummy-element d-flex justify-content-end">
+      <span class="float-right" *ngIf="selectedWorry">
+        <button
+          class="btn btn-info btn-sm"
+          (click)="setApproved()"
+          *ngIf="disableApprove"
+        >
+          Godkend
+        </button>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="setGroundless()"
+          *ngIf="disableGroundless"
+          style="margin-left: 5px"
+        >
+          Åbenlys grundløs
+        </button>
+      </span>
+    </div>
+  </div>
+
+  <!-- Side Menu-->
+  <div class="side side-flex">
+    <!-- Ikke Godkendte -->
+    <div class="menu-header bg-warning" (click)="scrollableClick($event)">
+      <h6>Ikke godkendte ({{ getNoActionMenuItems().length }})</h6>
+    </div>
+    <div class="scrollable" #scrollable1>
+      <app-worry-menu
+        *ngFor="
+          let menuItem of getNoActionMenuItems() | sortVerifyWorryMenuItem
+        "
+        [menuItem]="menuItem"
+        (click)="selectWorry(menuItem)"
+      ></app-worry-menu>
+    </div>
+
+    <!-- Godkendte -->
+    <div class="menu-header success-bg" (click)="scrollableClick($event)">
+      <h6>Godkendte ({{ getApprovedMenuItems().length }})</h6>
+    </div>
+    <div class="scrollable collapsed" #scrollable2>
+      <app-worry-menu
+        *ngFor="
+          let menuItem of getApprovedMenuItems() | sortVerifyWorryMenuItem
+        "
+        [menuItem]="menuItem"
+        (click)="selectWorry(menuItem)"
+      ></app-worry-menu>
+    </div>
+
+    <!-- Grundløse -->
+    <div class="menu-header danger-bg" (click)="scrollableClick($event)">
+      <h6>Åbenlys grundløs ({{ getGroundlessMenuItems().length }})</h6>
+    </div>
+    <div class="scrollable collapsed" #scrollable3>
+      <app-worry-menu
+        *ngFor="
+          let menuItem of getGroundlessMenuItems() | sortVerifyWorryMenuItem
+        "
+        [menuItem]="menuItem"
+        (click)="selectWorry(menuItem)"
+      ></app-worry-menu>
+    </div>
+  </div>
+
+  <!-- Specific worry-->
+  <div class="content">
+    <div class="container-fluid" *ngIf="selectedWorry">
+      <app-reporting-of
+        [person]="selectedMenuItem.reportedPerson"
+        [socialSecData]="selectedMenuItem.socialSecData"
+        (pushSocialSecNum)="getNewSocialSecNum($event)"
+      ></app-reporting-of>
+      <app-concern
+        [concern]="selectedWorry.concern"
+        *ngIf="selectedWorry.concern"
+      ></app-concern>
+      <app-reporter [reporter]="selectedWorry.reporter"></app-reporter>
+    </div>
+  </div>
+</div>

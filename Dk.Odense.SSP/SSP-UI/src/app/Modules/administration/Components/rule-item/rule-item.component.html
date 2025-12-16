@@ -1,0 +1,43 @@
+<div class="row mb-2 hoverable">
+  <div class="col-2">
+    <input
+      type="number"
+      [(ngModel)]="rule.priority"
+      class="form-control"
+      (keyup)="onUpdateEvent()"
+    />
+  </div>
+  <div class="col">
+    <select
+      class="form-control"
+      [(ngModel)]="rule.system"
+      (change)="onUpdateEvent()"
+    >
+      <option *ngFor="let system of systems">{{ system }}</option>
+    </select>
+  </div>
+  <div class="col">
+    <input
+      type="text"
+      [(ngModel)]="rule.searchValue"
+      class="form-control"
+      (keyup)="onUpdateEvent()"
+    />
+  </div>
+  <div class="col">
+    <select
+      class="form-control"
+      [(ngModel)]="rule.sspArea_Id"
+      (change)="onUpdateEvent()"
+    >
+      <option *ngFor="let area of areas" [value]="area.id">
+        {{ area.value }}
+      </option>
+    </select>
+  </div>
+  <div class="col">
+    <button class="btn btn-danger float-right" (click)="onDeleteEvent()">
+      <i class="fa fa-remove"></i>Slet
+    </button>
+  </div>
+</div>

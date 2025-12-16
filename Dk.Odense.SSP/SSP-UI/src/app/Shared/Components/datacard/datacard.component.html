@@ -1,0 +1,121 @@
+<div class="card">
+  <div class="card-header">
+    <a routerLink="/person_specific/{{ person?.id }}" class="unstyled">
+      <div class="row">
+        <div class="col-lg">
+          <h6>Navn</h6>
+          <span class="cardy">{{ person?.name }}</span>
+          <br />
+          <span style="font-size: 0.6em" class="blur">{{
+            person?.socialSecNum
+          }}</span>
+        </div>
+        <div class="col-lg">
+          <h6>Adresse</h6>
+          <span>{{ person?.address }} </span>
+        </div>
+        <div class="col-lg">
+          <h6>Alder</h6>
+          <span>{{ person?.age }}</span>
+        </div>
+        <div class="col-lg">
+          <h6>Recidiv</h6>
+          <span>{{ person?.worriesCount }}</span>
+        </div>
+        <div class="col-lg">
+          <h6>Skole</h6>
+          <span>{{ person?.schoolData?.name }}</span>
+          <br />
+          <span
+            style="font-size: 0.6em"
+            *ngIf="person?.schoolData?.dateFirst != null"
+            >{{ person?.schoolData?.dateFirst | date : 'd/M/yy' }} -
+            {{ person?.schoolData?.dateLast | date : 'd/M/yy' }}</span
+          >
+        </div>
+        <div class="col-lg">
+          <h6>Sagsområde</h6>
+          <span>{{ person?.sspArea?.value }}</span>
+        </div>
+        <div class="col-lg">
+          <h6>Kat.</h6>
+          <span>{{ person?.categorization?.value }}</span>
+        </div>
+      </div>
+    </a>
+    <div class="row titled-row" data-title="Grupperinger">
+      <div class="col-lg d-inline-flex pt-3">
+        <!-- Add Grouping-->
+        <div class="input-group add-content d-inline-flex">
+          <button class="btn btn-primary" type="button" (click)="Show()">
+            <i
+              class="fa"
+              [ngClass]="{ 'fa-plus': hidden, 'fa-minus': !hidden }"
+            ></i>
+          </button>
+          <mdb-form-control [ngClass]="{ 'd-none': hidden }">
+            <input
+              *ngIf="groups && groups.length > 0"
+              mdbInput
+              id="autocomplete"
+              type="text"
+              class="form-control add-grouping bg-white"
+              [ngModel]="searchText | async"
+              (ngModelChange)="searchText.next($event)"
+              [mdbAutocomplete]="autocomplete"
+            />
+            <label mdbLabel class="form-label" for="autocomplete"
+              >Søg efter Gruppering</label
+            >
+          </mdb-form-control>
+
+          <mdb-autocomplete
+            #autocomplete="mdbAutocomplete"
+            [displayValue]="displayValue"
+            (selected)="AddGroup($event)"
+          >
+            <mdb-option
+              *ngFor="let option of results | async"
+              [value]="option.id"
+            >
+              {{ option.value }}
+            </mdb-option>
+            <div *ngIf="notFound" class="autocomplete-no-results">
+              Ingen fundet :(
+            </div>
+          </mdb-autocomplete>
+
+          <div
+            class="badge"
+            *ngFor="
+              let grouping of person.groupings
+                | sortBy : 'value'
+                | sortBy : 'type'
+            "
+          >
+            <a
+              [ngClass]="
+                grouping.type === 'psu' ? 'link-badgepsu' : 'link-badge'
+              "
+              class="m-0"
+              routerLink="/{{ grouping.type }}/{{ grouping.id }}"
+            >
+              <span>{{ grouping.value }}</span>
+            </a>
+            <a
+              *ngIf="grouping.classificationName"
+              class="link-badgeclass m-0"
+              routerLink="/{{ grouping.type }}/{{ grouping.id }}"
+            >
+              <span>{{ grouping.classificationName }}</span>
+            </a>
+            <i
+              class="fas fa-times-circle"
+              (click)="RemoveGrouping(grouping)"
+            ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

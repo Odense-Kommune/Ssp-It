@@ -1,0 +1,16 @@
+.light {
+  border-radius: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  height: 15px;
+  width: 15px;
+  margin-bottom: 4px;
+}
+.light[data-color='0'] {
+  background-color: red;
+}
+.light[data-color='1'] {
+  background-color: yellow;
+}
+.light[data-color='2'] {
+  background-color: green;
+}

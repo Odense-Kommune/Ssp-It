@@ -1,0 +1,59 @@
+<ng-container
+  *ngIf="
+    reporter?.workplace === null || reporter?.workplace === '';
+    then noOne;
+    else specified
+  "
+></ng-container>
+<ng-template #noOne>
+  <app-collapse [title]="'Afsender'" [collapsed]="true">
+    <div class="row">
+      <div class="col-lg-6">
+        <h6>Navn</h6>
+        <p>{{ reporter?.name }}</p>
+        <h6>Telefonnummer</h6>
+        <p>{{ reporter?.phonenumber }}</p>
+        <h6>Arbejdsplads</h6>
+        <p>{{ reporter?.workplace }}</p>
+        <h6>Mailadresse</h6>
+        <p>{{ reporter?.email }}</p>
+      </div>
+      <div class="col-lg-6">
+        <h6>Nærmeste leder</h6>
+        <p>{{ reporter?.immediateLeader }}</p>
+        <h6>Nærmeste leders telefonnummer</h6>
+        <p>{{ reporter?.immediateLeaderPhone }}</p>
+        <h6>Nærmeste Leders Mailadresse</h6>
+        <p>{{ reporter?.immediateLeaderEmail }}</p>
+      </div>
+    </div>
+  </app-collapse>
+</ng-template>
+<ng-template #specified>
+  <app-collapse
+    [title]="reporter?.workplace"
+    [preTitle]="'Afsender'"
+    [collapsed]="true"
+  >
+    <div class="row">
+      <div class="col-lg-6">
+        <h6>Navn</h6>
+        <p>{{ reporter?.name }}</p>
+        <h6>Telefonnummer</h6>
+        <p>{{ reporter?.phonenumber }}</p>
+        <h6>Arbejdsplads</h6>
+        <p>{{ reporter?.workplace }}</p>
+        <h6>Mailadresse</h6>
+        <p>{{ reporter?.email }}</p>
+      </div>
+      <div class="col-lg-6">
+        <h6>Nærmeste leder</h6>
+        <p>{{ reporter?.immediateLeader }}</p>
+        <h6>Nærmeste leders telefonnummer</h6>
+        <p>{{ reporter?.immediateLeaderPhone }}</p>
+        <h6>Nærmeste Leders Mailadresse</h6>
+        <p>{{ reporter?.immediateLeaderEmail }}</p>
+      </div>
+    </div>
+  </app-collapse>
+</ng-template>

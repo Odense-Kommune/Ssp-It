@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="NewFolder\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="NewFolder\**" />
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+    <PackageReference Include="Hangfire" Version="1.8.10" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.10" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="2.17.0" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" Version="2.17.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dk.Odense.SSP.Core\Dk.Odense.SSP.Core.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.ExternalServices\Dk.Odense.SSP.ExternalServices.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.GDF\Dk.Odense.SSP.GDF.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.Logger\Dk.Odense.SSP.Logger.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.SBSYS\Dk.Odense.SSP.SBSYS.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.UserCase\Dk.Odense.SSP.UserCase.csproj" />
+    <ProjectReference Include="..\Xflow\Dk.Odense.SSP.Xflow.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.SagOgDokIndeks\Dk.Odense.SSP.SagOgDokIndeks.csproj" />
+  </ItemGroup>
+</Project>

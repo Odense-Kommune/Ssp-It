@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dk.Odense.SSP.Core\Dk.Odense.SSP.Core.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.Domain\Dk.Odense.SSP.Domain.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.ExternalServices\Dk.Odense.SSP.ExternalServices.csproj" />
+    <ProjectReference Include="..\Dk.Odense.SSP.Infrastructure\Dk.Odense.SSP.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

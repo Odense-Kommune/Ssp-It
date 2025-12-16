@@ -1,0 +1,53 @@
+<div class="header-row mb-1">
+  <div class="col-lg-3 pl-4 align-items-center d-flex">Dagsorden</div>
+  <div class="col-lg-3 d-flex align-items-center">Vælg ny mødedato</div>
+  <div class="col-lg-1 d-flex align-items-center">Personer</div>
+  <div class="col-lg-5 d-flex align-items-center">Handlinger</div>
+</div>
+<div
+  class="row mb-2 alt-bg d-flex align-items-center justify-content-center"
+  *ngIf="agendas?.length == 0 && loaded"
+>
+  <i>Der er ikke oprettet nogen dagsordener.</i>
+</div>
+<div class="row mb-2 alt-bg" *ngFor="let agenda of agendas">
+  <div class="col-lg-3 d-flex align-items-center" *ngIf="editMode !== agenda.id">
+    Uge {{ agenda.agendaNumber}}: {{agenda.date | date: 'dd-MM-yyyy'}} - {{noAgendaName(agenda.agendaName)}} 
+    <button class="btn btn-primary btn-sm edit-bn" [id]="agenda.id" (click)="setEditMode(agenda.id)"><i class="far fa-pen-to-square"></i></button>
+  </div>
+  <div class="col-lg-3 d-flex align-items-center" *ngIf="editMode === agenda.id">
+    Uge {{ agenda.agendaNumber}}: {{agenda.date | date: 'dd-MM-yyyy'}} - <input type="text" [(ngModel)]="agenda.agendaName" class="form-control edit-name-input" placeholder="Indtast dagsordens navn" [(ngModel)]="newAgendaName">
+    <button class="btn btn-primary btn-sm edit-bn" [id]="agenda.id" (click)="updateAgendaName(agenda.id)">Gem</button>
+  </div>
+  <div class="col-lg-3 d-flex align-items-center" *ngIf="agenda.date">
+    <app-date-picker
+      [date]="agenda.date"
+      (pushDate)="onDateUpdatedEvent($event, agenda)"
+    ></app-date-picker>
+  </div>
+  <div class="col-lg-1 d-flex align-items-center">
+    {{ agenda.agendaItems?.length }}
+    <span *ngIf="!agenda.agendaItems">0</span>
+  </div>
+  <div class="col-lg-5 d-flex align-items-center">
+    <button
+      class="btn btn-secondary btn-sm mr-2"
+      (click)="getDonwloadPath(agenda)"
+    >
+      <i class="fas fa-download"></i>
+      <span *ngIf="!isLoading">Excel</span>
+      <span *ngIf="isLoading">Henter Excel Fil...</span>
+    </button>
+    <button
+      class="btn btn-secondary btn-sm mr-2"
+      (click)="archiveAgenda(agenda)"
+    >
+      <i class="fas fa-archive"></i> Arkiver
+    </button>
+    <a href="javascript:void(0)" [routerLink]="getRouteUrl(agenda)"
+      ><button class="btn btn-primary btn-sm">
+        <i class="fas fa-arrow-right"></i> Vis
+      </button></a
+    >
+  </div>
+</div>

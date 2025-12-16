@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-lg-4">
+    {{ personGroup.name }}
+  </div>
+  <div class="col-lg-3">
+    <span class="blur">{{ personGroup.cpr }}</span>
+  </div>
+  <div class="col-lg-3">
+    <select
+      class="form-control"
+      [(ngModel)]="selectedClassification"
+      (change)="setClassification($event)"
+    >
+      <option value="00000000-0000-0000-0000-000000000000">Vælg</option>
+      <option
+        *ngFor="let classification of classifications | sortBy : 'value'"
+        value="{{ classification.id }}"
+      >
+        {{ classification.value }}
+      </option>
+    </select>
+  </div>
+  <div class="col-lg-2">
+    <button
+      class="btn btn-sm btn-warning"
+      type="button"
+      (click)="removeFromCurrent()"
+    >
+      Fjern
+    </button>
+  </div>
+</div>
+<div class="row titled-row" data-title="Grupperinger">
+  <div class="col mt-3">
+    <div
+      *ngFor="
+        let grp of personGroup.groups | sortBy : 'value' | sortBy : 'type'
+      "
+      class="me-2 d-inline-flex mb-2 mw60"
+    >
+      <a
+        routerLink="/{{ grp.type }}/{{ grp.id }}"
+        [ngClass]="grp.type === 'psu' ? 'link-badgepsu' : 'link-badge'"
+        class="m-0 mybadge"
+        >{{ grp.value }}
+      </a>
+
+      <a
+        *ngIf="grp.classificationName"
+        routerLink="/{{ grp.type }}/{{ grp.id }}"
+        class="link-badgeclass m-0"
+        >{{ grp.classificationName }}
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="grid" *ngIf="agendaId">
+  <!-- Sub-Header -->
+  <div class="subheader justify-content-between">
+    <div class="inset"></div>
+    <div>
+      <h6 *ngIf="agenda.agendaName !== null">
+        {{ agenda.agendaName }} - Dagsorden uge {{ agenda.agendaNumber }} -
+        {{ agenda.date | date: 'dd-MM-yyyy' }}
+      </h6>
+      <h6 *ngIf="agenda.agendaName === null">
+        Dagsorden uge {{ agenda.agendaNumber }} - {{ agenda.date | date: 'dd-MM-yyyy' }}
+      </h6>
+    </div>
+    <div>
+      <button class="btn btn-info" (click)="getDonwloadPath()">
+        <i class="fas fa-download pl-1 pr-2"></i>
+        <span *ngIf="!isLoading">Excel</span>
+        <span *ngIf="isLoading">Henter Excel Fil...</span>
+      </button>
+    </div>
+  </div>
+  <!-- Side Menu-->
+  <div class="side side-flex">
+    <div class="scrollable">
+      <ng-container *ngIf="!showCrimeSceneMenu">
+        <app-agenda-specific-menu *ngFor="let menuItem of menuItems | sortBy: 'sortOrder'" [menuItem]="menuItem"
+          [agendaNumber]="agenda.agendaNumber" (pushData)="getSelectedMenuData($event)"
+          (pushCrimeScene)="chooseCrimeScene($event)"></app-agenda-specific-menu>
+      </ng-container>
+      <app-agenda-specific-menu-crimescene *ngIf="showCrimeSceneMenu" [menuItems]="menuItems"
+        [crimescene]="choosenCrimeScene" (pushData)="getSelectedMenuData($event)"
+        (closeMenu)="closeCrimeSceneMenu()"></app-agenda-specific-menu-crimescene>
+    </div>
+  </div>
+  <!-- Content -->
+  <div class="content" *ngIf="worry && person.id">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg">
+          <app-datacard [person]="person" [groups]="groups"></app-datacard>
+        </div>
+      </div>
+      <!-- Test three column layout-->
+      <div class="row top-margin">
+        <!-- First col (bekymring) -->
+        <div class="col-lg">
+          <app-reporter [reporter]="worry.reporter"></app-reporter>
+          <app-concern *ngIf="worry.concern" [concern]="worry.concern"></app-concern>
+          <app-assessment [assessment]="worry.assessment" [collapsed]="true"></app-assessment>
+          <app-worry-actions [worryId]="selectedMenuItem" (pushRefresh)="refresh($event)"
+            *ngIf="!archived"></app-worry-actions>
+        </div>
+
+        <!-- Second Col (person) -->
+        <div class="col-lg" *ngIf="policeWorryCategories && policeWorryRoles && worry && agendaId">
+          <app-statistics [policeWorryCategories]="policeWorryCategories" [policeWorryRoles]="policeWorryRoles"
+            [selectedCategory]="worry?.policeWorryCategory?.id" [selectedRole]="worry?.policeWorryRole?.id"
+            (pushPoliceCategory)="savePoliceWorryCategory($event)"
+            (pushPoliceRole)="savePoliceWorryRole($event)"></app-statistics>
+          <div class="top-margin">
+            <app-page-robustness [personId]="person.id"></app-page-robustness>
+          </div>
+        </div>
+        <!-- Third col (dagsordenspunkt) -->
+        <div class="col-lg" *ngIf="person.sspArea && categorizations && sspAreas">
+          <!-- Handlinger -->
+          <div class="bot-margin">
+            <app-actions [categorizations]="categorizations!" [sspAreas]="sspAreas!"
+              [selectedCategorization]="person.agendaCategorization.id!" [selectedSspArea]="person.sspArea.id!"
+              [socialWorker]="person.socialWorker" (pushCategorization)="setCategorization($event)"
+              (pushSspArea)="setSspArea($event)" (pushSocialWorker)="saveSocialWorker($event)"></app-actions>
+          </div>
+        </div>
+        <hr class="divider" />
+        <div class="row">
+          <div class="col-6">
+            <app-notes [title]="'Vidensdeling'" [notes]="notes" [newNote]="note"
+              (SaveText)="onSaveNote($event)"></app-notes>
+          </div>
+          <div class="col-6">
+            <app-notes [title]="'Noter'" [notes]="additionalNotes" [newNote]="additionalNote"
+              (SaveText)="onSaveAddNote($event)"></app-notes>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

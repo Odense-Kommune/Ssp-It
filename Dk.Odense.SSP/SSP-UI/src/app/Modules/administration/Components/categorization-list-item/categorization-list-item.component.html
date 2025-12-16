@@ -1,0 +1,38 @@
+<div class="row mb-2">
+  <div class="col-lg-5">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="content.value"
+      (keyup)="update()"
+    />
+  </div>
+  <div class="col-lg-4">
+    <input
+      type="number"
+      class="form-control"
+      min="1"
+      max="1095"
+      [(ngModel)]="content.daysToExpire"
+      (keyup)="update()"
+    />
+  </div>
+  <div class="col-lg-2">
+    <div class="checkbox">
+      <label style="font-size: 1.7em">
+        <input
+          type="checkbox"
+          value=""
+          [(ngModel)]="content.deleteAfterSspEnd"
+          (click)="update()"
+        />
+        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+      </label>
+    </div>
+  </div>
+  <div class="col-lg-1 d-flex justify-content-center align-items-end">
+    <button class="btn btn-outline-primary" (click)="delete(content)">
+      Slet
+    </button>
+  </div>
+</div>

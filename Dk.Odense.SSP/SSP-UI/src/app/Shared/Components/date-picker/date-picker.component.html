@@ -1,0 +1,21 @@
+<mdb-form-control>
+  <input
+    mdbInput
+    [mdbDatepicker]="datepicker"
+    [value]="(date | date: 'dd-MM-yyyy') || ''"
+    type="text"
+    class="form-control bg-white"
+    id="datePickerId"
+  />
+  <label mdbLabel for="datePickerId" class="form-label">Vælg dato</label>
+  <mdb-datepicker-toggle [mdbDatepicker]="datepicker"></mdb-datepicker-toggle>
+  <mdb-datepicker
+    #datepicker
+    [format]="'dd-mm-yyyy'"
+    [startDay]="1"
+    [startDate]="startDate"
+    [options]="myDatePickerOptions"
+    [inline]="true"
+    (dateChanged)="datePicked($event)"
+  ></mdb-datepicker>
+</mdb-form-control>

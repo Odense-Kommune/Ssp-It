@@ -1,0 +1,57 @@
+.titled-row {
+  padding-top: 5px;
+  margin-top: 10px;
+  border-top: 1px solid rgb(222, 222, 222);
+  position: relative;
+}
+
+.titled-row::before {
+  padding: 0 1.1em;
+  position: absolute;
+  display: block;
+  content: attr(data-title);
+  left: 50%;
+  top: -0.6em;
+  transform: translateX(-50%);
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.spinner {
+  margin: 0;
+  width: 100%;
+}
+
+.link-badge, .link-badgepsu, .link-badgeclass {
+  font-size: 1em;
+}
+
+.badge {
+  box-shadow: none !important;
+  width: fit-content;
+  position: relative;
+  margin-right: 5px;
+}
+
+i.fas.fa-times-circle {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+  color: black;
+}
+
+.add-content {
+  width: fit-content;
+  display: -webkit-inline-box;
+  background-color: #f8f9fa;
+  }
+  
+  .add-grouping {
+    position: relative;
+    display: inline-block;
+  }
+
+.bg-white {
+  background-color: white !important;
+}

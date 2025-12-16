@@ -1,0 +1,20 @@
+<div class="input-group mb-3">
+  <input type="hidden" [value]="content.id" />
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Value"
+    [(ngModel)]="content.value"
+    (keyup)="updateEvent()"
+  />
+  <div class="input-group-append">
+    <button
+      class="btn btn-outline-primary"
+      type="button"
+      id="button-addon2"
+      (click)="onDelete()"
+    >
+      Slet
+    </button>
+  </div>
+</div>

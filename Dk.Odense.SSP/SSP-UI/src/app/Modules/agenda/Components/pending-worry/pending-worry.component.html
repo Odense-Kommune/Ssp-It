@@ -1,0 +1,38 @@
+<app-collapse [title]="'Tilføj punkter til dagsorden'">
+  <div class="no-padding-grid">
+    <div class="header-area">
+      <span>Medbring</span>
+      <span>Person</span>
+      <span>Nye bekymringer</span>
+    </div>
+    <!-- Pending Worries-->
+    <div class="content-area">
+      <div class="no-item-error" *ngIf="pendingWorries?.length == 0 && loaded">
+        <i>Der er ingen personer med verificerede bekymringer</i>
+      </div>
+      <div *ngFor="let worry of pendingWorries" class="content-item" (click)="checkboxClick($event, worry)">
+        <span><input type="checkbox" checked /></span>
+        <span>{{ worry.person.name }}</span>
+        <span>{{ worry.worries.length }}</span>
+      </div>
+    </div>
+    <!-- Control -->
+    <div class="control-area">
+      <div class="input-group">
+        <select class="form-control" #selector>
+          <option value="">Vælg dagsorden</option>
+          <option *ngFor="let agenda of agendas" [value]="agenda.id">
+            <span *ngIf="agenda.agendaName !== null">{{agenda.agendaName}} - {{ agenda.agendaNumber | mondayByWeek:
+              agenda.date }}</span>
+            <span *ngIf="agenda.agendaName === null">{{ agenda.agendaNumber | mondayByWeek: agenda.date }}</span>
+          </option>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-primary" (click)="addSelectedToAgenda(selector.value)" [disabled]="busy">
+            Tilføj
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-collapse>

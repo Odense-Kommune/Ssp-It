@@ -1,0 +1,44 @@
+<div class="card bg-light">
+  <div class="card-header" (click)="collapse()">
+    <div class="row">
+      <div class="col-lg-10" >
+        <b>
+          <p style="font-size: 1.2em;" class="cardy">{{ person.name }}</p>
+        </b>
+      </div>
+      <div class="col-lg-2 d-flex justify-content-center">
+        <button type="button" class="btn btn-sm btn-primary" style="z-index: 3;" (click)="downloadItem();$event.stopPropagation()">
+          <i class="fas fa-file-download"></i>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg">
+        <p class="smalltxt blur">{{ person.socialSecNum }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg">
+        <b>
+          <p class="smalltxt2 cardy" [ngClass]="{'text-danger' : person.sspArea.value == null}">Sagsområde</p>
+        </b>
+        <p class="smalltxt">{{ person.sspArea.value }}</p>
+      </div>
+      <div class="col-lg zero-padding">
+        <b>
+          <p class="smalltxt2 cardy">Recidiv</p>
+        </b>
+        <p class="smalltxt">{{ person.worriesCount }}</p>
+      </div>
+      <div class="col-lg zero-padding">
+        <b>
+          <p class="smalltxt2 cardy" [ngClass]="{'text-danger' : person.agendaCategorization.value == null}">Kategori</p>
+        </b>
+        <p class="smalltxt">{{ person.agendaCategorization.value }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="collapsible" [ngClass]="{ collapsed: isCollapsed }" #inputRef>
+    <ng-content></ng-content>
+  </div>
+</div>
